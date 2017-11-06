@@ -1,27 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { updateMenu } from ".././actions/giphyActions";
 
 class Results extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      apiData: this.props.apiData,
-    };
-    this.renderList = this.renderList.bind(this);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log(prevProps.apiData);
-  }
-
-  renderList() {
-    if (this.props.apiData) {
-      return this.props.apiData.map(e => {
-        <li key={e.id}>
-          <img src={e.embed_url} alt="" />
-        </li>;
-      });
+  shouldComponentUpdate(newProps, newState) {
+    if (
+      this.props.giphy.fetched !== newProps.giphy.fetched ||
+      this.props.giphy.giphy !== newProps.giphy.giphy
+    ) {
+      return true;
+    } else {
+      return false;
     }
   }
+
+  saveList = url => {
+    let savedItemsArr = JSON.parse(localStorage.getItem("savedItems")) || [];
+    // debugger
+    if (savedItemsArr.indexOf(url) === -1) {
+      savedItemsArr.push(url);
+      localStorage.setItem("savedItems", JSON.stringify(savedItemsArr));
+      this.props.dispatch(updateMenu());
+    }
+  };
+
+  renderList = () => {
+    if (this.props.giphy.fetched !== false) {
+      return this.props.giphy.giphy.map(e => {
+        return (
+          <li key={e.id} className="list" onClick={() =>this.saveList(e.images.original.webp)}>
+            <img src={e.images.original.webp} alt="" />
+            <div className="save-item">+</div>
+          </li>
+        );
+      });
+    }
+  };
 
   render() {
     return (
@@ -32,4 +46,8 @@ class Results extends Component {
   }
 }
 
-export default Results;
+function mapStateToProps({ giphy }) {
+  return { giphy };
+}
+
+export default connect(mapStateToProps)(Results);

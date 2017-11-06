@@ -1,52 +1,70 @@
 import React, { Component } from "react";
-// import logo from "./logo.svwg";
-import AddInput from "./components/AddInput";
-import Results from "./components/Results";
+import Main from "./components/Main";
+import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import { fetchGiphy } from "./actions/giphyActions";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      apiData: null,
-    };
-    this.handleForm = this.handleForm.bind(this);
-    this.trimSpaces = this.trimSpaces.bind(this);
-  }
+  changeUrlToUserInput = match => {
+    window.history.pushState(
+      null,
+      null,
+      `Search=${this.props.giphy.userInput}`
+    );
+  };
 
-  trimSpaces(value) {
-    if (value.trim() === "") {
-      return false;
-    } else {
-      value = value.trim();
+  fetch = match => {
+    if (!this.props.giphy.comingFromInput && this.props.giphy.shouldFetch) {
+      this.props.dispatch(fetchGiphy(match.params.id));
+    }
+  };
+
+  shouldComponentUpdate(newProps, newState) {
+    let oldData = this.props.giphy;
+    let newData = newProps.giphy;
+    if (
+      oldData.userInput !== newData.userInput ||
+      oldData.comingFromInput !== newData.comingFromInput ||
+      oldData.shouldFetch !== newData.shouldFetch
+    ) {
       return true;
+    } else {
+      return false;
     }
   }
 
-  handleForm(e) {
-    e.preventDefault();
-    let userInput = e.target.searchBox.value;
-    if (!this.trimSpaces(userInput)) return false;
-    fetch(
-      `https://api.giphy.com/v1/gifs/search?api_key=zFRBGyY2Tigp2Es8DUs6oDKHssUtl5iI&q=${e}&limit=6&rating=PG&lang=en`
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(responseJson => {
-        this.setState({
-          apiData: responseJson.data,
-        });
-      });
-  }
-
   render() {
+    if (this.props.giphy.comingFromInput) {
+      this.changeUrlToUserInput();
+      this.props.dispatch(fetchGiphy(this.props.giphy.userInput));
+    }
     return (
       <div className="App">
-        <AddInput handleForm={this.handleForm} />
-        <Results apiData={this.state.apiData} />
+        <Switch>
+          <Route
+            path="/Search=:id"
+            render={({ match }) => {
+              this.fetch(match);
+              return <Main />;
+            }}
+          />
+          <Route
+            path="/"
+            render={({ match }) => {
+              if (this.props.giphy.userInput === null) {
+                window.history.replaceState(null, null, "/");
+              }
+              return <Main />;
+            }}
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps({ giphy }) {
+  return { giphy };
+}
+
+export default connect(mapStateToProps)(App);

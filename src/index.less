@@ -1,0 +1,355 @@
+html,
+body,
+#root,
+.App {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #1d328a;
+  background-image: url("./images/bgImg.jpg");
+}
+
+#page-wrap {
+  height: 100%;
+  background-color: #3d56ba;
+  background-image: url("./images/bgImg.jpg");
+}
+
+#outer-container {
+  height: 100%;
+}
+
+.bm-burger-button {
+  position: absolute;
+  width: 2%;
+  height: 3%;
+  left: 12px;
+  margin-top: 1.3vw;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.bm-burger-bars {
+  background: #a7a7a7;
+}
+
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+.bm-cross {
+  background: #bdc3c7;
+}
+
+.bm-menu {
+  background-color: #3d56ba;
+  background-image: url(./images/bgImg.jpg);
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  font-size: 1.15em;
+}
+
+.bm-item-list {
+  height: auto !important;
+}
+
+.sidebar {
+  ul {
+    list-style: none;
+    margin-top: 5.4vh;
+    outline: none;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+
+    li {
+      width: 11vw;
+      height: 11vw;
+      margin-bottom: 1vw;
+      position: relative;
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+
+      .options {
+        position: absolute;
+        background: #f5f5f5;
+        bottom: 0px;
+        width: 100.5%;
+        margin-left: -2px;
+        height: 2vw;
+        border-bottom: 0.1vw solid #3c3c3c;
+        border-right: 0.1vw solid #3c3c3c;
+        border-left: 0.1vw solid #3c3c3c;
+        display: none;
+
+        .delete-img-bttn {
+          width: 2vw;
+          position: absolute;
+          right: 0px;
+          filter: contrast(5);
+          margin-top: 0.078vw;
+          cursor: pointer;
+        }
+        .delete-img-bttn:hover {
+          -webkit-filter: contrast(100);
+          filter: contrast(100);
+        }
+        .open-img-bttn {
+          width: 1.9vw;
+          position: absolute;
+          -webkit-filter: contrast(0);
+          filter: contrast(0);
+          margin-top: 0.078vw;
+          cursor: pointer;
+          height: 90%;
+        }
+        .open-img-bttn:hover {
+          -webkit-filter: contrast(40%);
+          filter: contrast(40%);
+        }
+      }
+
+      img:hover + .options,
+      div:hover {
+        display: block;
+      }
+    }
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 59%;
+  h1 {
+    color: #fff;
+    margin-bottom: 23vh;
+    font-size: 9vw;
+  }
+  .add-input {
+    text-align: center;
+
+    input {
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #fff;
+      width: 55%;
+      text-align: center;
+      outline: none;
+      color: white;
+      padding: 0px 2.5vw;
+      font-size: 4vw;
+    }
+
+    .bttn {
+      height: 5vw;
+      width: 5vw;
+      border: 0;
+      background: url(./images/searchIcon.png);
+      cursor: pointer;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.new-header {
+  opacity: 0.9;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  -webkit-box-shadow: 0 1px 36px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 1px 36px -6px rgba(0, 0, 0, 0.75);
+  z-index: 10;
+  margin-bottom: 1.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  h1 {
+    margin: 0;
+    font-size: 3vw;
+    margin-right: 1vw;
+  }
+  .add-input {
+    input {
+      border: 0;
+      background: transparent;
+      border-bottom: 0.1vh solid white;
+      outline: none;
+      font-size: 2.5vw;
+      width: 15vw;
+      text-align: center;
+      color: white;
+      margin-left: 1vw;
+    }
+
+    .bttn {
+      height: 2.7vw;
+      width: 3vw;
+      border: 0;
+      background: url(./images/searchIcon.png);
+      cursor: pointer;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.zoom-image-container {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 0;
+  right: 0;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  text-align: center;
+  background: white;
+  width: 30vw;
+  height: 30vw;
+  margin: auto;
+
+  .close-bttn-img {
+    width: 30px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+
+  .zoom-image {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.3;
+}
+
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: white;
+  opacity: 0.3;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: white;
+  opacity: 0.3;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+  opacity: 0.3;
+}
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
+  opacity: 0.3;
+}
+
+.results {
+  background-color: #3d56ba;
+  background-image: url("./images/bgImg.jpg");
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  li {
+    border: 2px dashed black;
+    margin-bottom: 55px;
+    position: relative;
+    width: 59.5vh;
+    height: 42.5vh;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+
+    .save-item {
+      position: absolute;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.3);
+      height: 100%;
+      width: 100%;
+      opacity: 0.5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 188px;
+      cursor: pointer;
+      color: white;
+      display: none;
+    }
+
+    img:hover + .save-item,
+    div:hover {
+      display: flex;
+    }
+  }
+}
+
+@media only screen and (max-width: 791px) {
+  .new-header {
+    h1 {
+      font-size: 5vw;
+    }
+
+    .add-input {
+      input {
+        font-size: 4.5vw;
+      }
+
+      .bttn {
+        height: 4vw;
+        width: 4vw;
+      }
+    }
+  }
+
+  .bm-burger-button {
+    width: 4%;
+    height: 4%;
+    left: 12px;
+    margin-top: 2vw;
+  }
+
+  .zoom-image-container {
+    height: 50vw;
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .bm-burger-button {
+    height: 4vw;
+    margin-top: 1.3vh;
+  }
+  .bm-cross-button {
+    right: 8px;
+    top: 7px;
+    left: 50%;
+    margin-left: -13px;
+  }
+}
