@@ -31,7 +31,7 @@ Giphy App allows you to search images and saves them in your local storage thus 
 ### What techs are used? 
  - React
  - Redux
- - React Router
+ - React Router -- [http://giphy-react-redux-app.herokuapp.com/Search=Hi]
  - React Burger Menu
  - LESS - (CSS)
  - Giphy API
