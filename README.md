@@ -36,4 +36,4 @@ Giphy App allows you to search images and saves them in your local storage thus 
  - LESS - (CSS)
  - Giphy API
 
-![alt text](https://raw.githubusercontent.com/askflow1111/giphy-react-app/master/public/screenshot.png)
+![alt text](https://raw.githubusercontent.com/askflow1111/giphy-react-app/master/public/newscreenshot.png)
